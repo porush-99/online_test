@@ -1,0 +1,22 @@
+<%= form_for @student_answer, url: test_submit_path, method: :post do |form| %>
+
+	
+	<ol>
+		<% @subject.questions.each do |question| %>
+			<%= form.hidden_field :user_id, :value => current_user.id %>
+			<%= form.hidden_field :question_id, :value => question.id %>
+			<li><%= question.title %></li>
+
+			<ol>
+				<% question.answers.each do |answer| %>
+					<li><%= form.radio_button :answer_id, answer.id %>
+						<%= form.label :answer_id, answer.q_answer %>
+					</li>
+				<% end %>
+			</ol>
+		<% end %>
+	</ol>
+
+	<%= form.submit "Submit" %>
+
+<% end %>

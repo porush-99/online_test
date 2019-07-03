@@ -1,0 +1,19 @@
+<%= @subject.name %>
+
+<br><br>
+
+<ol>
+	<% @subject.questions.each do |question| %>
+		<li><%= question.title %></li>
+
+		<ol>
+			<% question.answers.each do |answer| %>
+				<li><%= answer.q_answer %>
+					<%= answer.correct_answer %>
+				</li>
+			<% end %>
+		</ol>
+	<% end %>
+</ol>
+
+<%= link_to "Home", root_path %>

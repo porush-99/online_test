@@ -1,0 +1,55 @@
+<% if user_signed_in? %>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+      <% if current_user.student? %>
+        <div class="navbar-brand" >STUDENT</div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+
+      <% else %>
+        <div class="navbar-brand">TEACHER</div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+              <%= link_to "Create Test", test_new_path, class: "nav-link" %><span class="sr-only">(current)</span>
+            </li>
+      <% end %>
+
+            <li class="nav-item active">
+              <%= link_to 'Edit profile', edit_user_registration_path, class: "nav-link" %><span class="sr-only">(current)</span>
+            </li>
+
+            <li class="nav-item active">
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "nav-link" %><span class="sr-only">(current)</span>
+            </li>
+        </ul>
+      </div>
+    </nav>
+  
+
+<% else %>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">HOME</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+          <li class="nav-item active">
+            <%= link_to "Sign up", new_user_registration_path, class: "nav-link" %><span class="sr-only">(current)</span>
+          </li>
+          <li class="nav-item active">
+            <%= link_to "Login", new_user_session_path, class: "nav-link" %><span class="sr-only">(current)</span>
+          </li>
+      </ul>
+    </div>
+  </nav>
+<% end %>

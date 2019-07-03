@@ -1,0 +1,29 @@
+<%= nested_form_for @subject, url: test_update_path(@subject), method: :patch do |form| %>
+	<%= form.label :name, "subject" %><br>
+	<%= form.text_field :name %><br><br>
+
+	<ol>
+		<%= form.fields_for :questions do |f| %>
+			<p>
+				<li><%= f.label :title, "Question" %><br>
+					<%= f.text_area :title %><br>
+					<%= f.link_to_remove "Delete Question" %><br>
+				</li>
+
+				<ol>
+					<%= f.fields_for :answers do |forum| %>
+						<li><%= forum.label :q_answer, "Answer" %><br>
+							<%= forum.text_field :q_answer %>
+							<%= forum.check_box :correct_answer %><br>
+							<%= forum.link_to_remove "Delete Answer" %><br>
+						</li>
+					<% end %>
+					<%= f.link_to_add "Add Answers", :answers %>
+				</ol>
+			</p>
+		<% end %>
+		<%= form.link_to_add "Add Question", :questions %><br>
+	</ol>
+	
+	<%= form.submit "Update" %>
+<% end %>

@@ -1,0 +1,40 @@
+<% if user_signed_in? %>
+  Logged in as <strong><%= current_user.email %></strong>.
+<% end %>
+
+<br><br>
+
+<% if current_user.teacher? %>
+	<table>
+		<tr>
+			<th>Test Created</th>
+		</tr>
+
+		<% @subjects.each do |subject| %>
+			<tr>
+				<td><%= subject.name %></td>
+				<td><%= link_to "Show", test_show_path(subject.id) %> | </td> 
+				<td><%= link_to "Edit", test_edit_path(subject.id) %> | </td> 
+				<td><%= link_to "Delete", test_destroy_path(subject.id),
+											method: :delete,
+											data: { confirm: "Are you sure" } %></td>
+			</tr>
+		<% end %>
+	</table>
+
+<% else %>
+	<center>
+		<table>
+			<tr>
+				<th><h3>List of all the tests</h3></th>
+			</tr>
+			<% @subjects.each do |subject| %>
+				<tr>
+					<td><%= subject.name %></td>
+					<td><%= link_to "Take Test", take_test_path(subject.id) %></td> 
+				</tr>
+			<% end %>
+		</table>
+	</center>
+
+<% end %>

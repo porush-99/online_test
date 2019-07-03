@@ -1,0 +1,53 @@
+<%= stylesheet_link_tag "edit_form" %>
+<div id="login">
+    <div class="container">
+      <div id="login-row" class="row justify-content-center align-items-center">
+        <div id="login-column" class="col-md-6">
+          <div id="login-box" class="col-md-12">
+            <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+              <%= render "devise/shared/error_messages", resource: resource %>
+              <h3 class="text-center text-info">Edit <%= resource_name.to_s.humanize %></h3>
+
+              <div class="form-group">
+                <%= f.label :email, class: "text-info" %><br />
+                <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
+              </div>
+
+              <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+                <div class="text-info">Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+              <% end %>
+
+              <div class="form-group">
+                <%= f.label :password, class: "text-info" %> <i class="text-info">(leave blank if you don't want to change it)</i><br />
+                <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+                <% if @minimum_password_length %>
+                  <em class="text-info"><%= @minimum_password_length %> characters minimum</em>
+                <% end %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :password_confirmation, class: "text-info" %><br />
+                <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+              </div>
+
+              <div class="form-group">
+                <%= f.label :current_password, class: "text-info" %> <i class="text-info">(we need your current password to confirm your changes)</i><br />
+                <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control" %>
+              </div>
+
+              <div class="form-group">
+                <br>
+                <%= f.submit "Update", class: "btnSubmit" %>
+              </div>
+              <div>
+                <br>
+                <h3 class="text-info">Cancel my account</h3>
+                <p class="text-info">Unhappy? <br><br> <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btnSubmit" %></p>
+              </div>
+              <%= link_to "Back", :back %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
